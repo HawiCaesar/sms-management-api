@@ -1,0 +1,20 @@
+{
+  "name": "sms-app-api",
+  "version": "1.0.0",
+  "description": "An sms management application API",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "HawiCaesar",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2"
+  }
+}
