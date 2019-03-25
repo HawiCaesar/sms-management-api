@@ -26,3 +26,26 @@ export const getAllContacts = (request, response) => {
     });
   });
 };
+
+export const updateContacts = (request, response) => {
+  return db.Contact.findOne({
+    where: {
+      id: request.params.contactId
+    }
+  })
+    .then(contact => {
+      return contact
+        .update(request.body, {
+          fields: Object.keys(request.body)
+        })
+        .then(updatedContact =>
+          response.status(200).send({
+            message: "Contact updated",
+            contact: updatedContact
+          })
+        );
+    })
+    .catch(error =>
+      response.status(404).send({ message: "Contact not found", error })
+    );
+};
