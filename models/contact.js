@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [2, 20],
             msg:
-              "The name must be atleast 2 characters in length and a maximum of 20 character in length"
+              "The name must be atleast 2 characters in length and a maximum of 20 characters in length"
           }
         }
       },
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notEmpty: {
-            args: true,
+            name: "phoneNumberAlready",
             msg: "The phone number of the contact cannot be empty"
           }
         },
