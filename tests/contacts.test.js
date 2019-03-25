@@ -2,7 +2,7 @@ import "babel-polyfill";
 import requests from "supertest";
 import app from "../app";
 import { destroyContacts } from "./teardown";
-import { validContact } from "./fixtures";
+import validContact from "./fixtures";
 
 const api = new requests(app);
 
@@ -15,7 +15,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact)
+      .send(validContact[0])
       .end((error, response) => {
         if (error) {
           throw done(error);
@@ -30,7 +30,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact)
+      .send(validContact[1])
       .end((postError, postResponse) => {
         if (postError) {
           throw done(postError);
@@ -38,7 +38,7 @@ describe("/api/contacts tests", () => {
         api
           .post("/api/contacts")
           .set("Content-Type", "application/json")
-          .send(validContact)
+          .send(validContact[1])
           .end((postAgainError, postAgainResponse) => {
             if (postAgainError) {
               throw done(postAgainError);
@@ -56,7 +56,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact)
+      .send(validContact[2])
       .end((postError, postResponse) => {
         if (postError) {
           throw done(postError);
@@ -64,15 +64,38 @@ describe("/api/contacts tests", () => {
         api
           .put("/api/contacts/1")
           .set("Content-Type", "application/json")
-          .send({ phone: "6768329823" })
+          .send({ phone: "09812345078" })
           .end((updateError, response) => {
             if (updateError) {
               throw done(updateError);
             }
             expect(response.status).toEqual(200);
-            expect(response.body.contact.phone).toMatch("6768329823");
+            expect(response.body.contact.phone).toMatch("09812345078");
             done();
           });
       });
+  });
+
+  it("should read one contact", done => {
+    api.get("/api/contacts/2").end((fetchError, response) => {
+      if (fetchError) {
+        throw done(fetchError);
+      }
+      expect(response.status).toEqual(200);
+      expect(response.body.contact.name).toMatch("Derren Green");
+      expect(response.body.contact.phone).toMatch("101201212");
+      done();
+    });
+  });
+  it("should show an error for a non-existing contact", done => {
+    api.get("/api/contacts/99").end((fetchError, response) => {
+      if (fetchError) {
+        throw done(fetchError);
+      }
+      console.log(response.body, "@##@");
+      expect(response.status).toEqual(404);
+      expect(response.body.message).toMatch("Contact not found");
+      done();
+    });
   });
 });

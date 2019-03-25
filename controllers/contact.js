@@ -21,10 +21,30 @@ export const createContact = (request, response) => {
 
 export const getAllContacts = (request, response) => {
   return db.Contact.findAll().then(contacts => {
-    response.status(200).send({
+    return response.status(200).send({
       contacts
     });
   });
+};
+
+export const getOneContact = (request, response) => {
+  return db.Contact.findOne({
+    where: {
+      id: request.params.contactId
+    }
+  })
+    .then(contact => {
+      if (!contact) {
+        return response.status(404).send({ message: "Contact not found" });
+      }
+      return response.status(200).send({
+        message: "Contact retrived",
+        contact
+      });
+    })
+    .catch(error =>
+      response.status(404).send({ message: "Contact not found", error })
+    );
 };
 
 export const updateContacts = (request, response) => {
@@ -34,6 +54,9 @@ export const updateContacts = (request, response) => {
     }
   })
     .then(contact => {
+      if (!contact) {
+        return response.status(404).send({ message: "Contact not found" });
+      }
       return contact
         .update(request.body, {
           fields: Object.keys(request.body)
