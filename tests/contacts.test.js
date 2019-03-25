@@ -51,4 +51,28 @@ describe("/api/contacts tests", () => {
           });
       });
   });
+
+  it("should update a contact", done => {
+    api
+      .post("/api/contacts")
+      .set("Content-Type", "application/json")
+      .send(validContact)
+      .end((postError, postResponse) => {
+        if (postError) {
+          throw done(postError);
+        }
+        api
+          .put("/api/contacts/1")
+          .set("Content-Type", "application/json")
+          .send({ phone: "6768329823" })
+          .end((updateError, response) => {
+            if (updateError) {
+              throw done(updateError);
+            }
+            expect(response.status).toEqual(200);
+            expect(response.body.contact.phone).toMatch("6768329823");
+            done();
+          });
+      });
+  });
 });
