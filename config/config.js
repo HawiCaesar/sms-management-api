@@ -3,12 +3,11 @@ require("dotenv").config;
 const config = {
   development: {
     username: process.env.DATABASE_USERNAME,
-    password: proccess.env.DATABASE_PASSWORD,
+    password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
     host: "127.0.0.1",
     port: 5432,
-    dialect: "postgres",
-    operatorsAliases: false
+    dialect: "postgres"
   },
   test: {
     username: process.env.TEST_DATABASE_USERNAME,
@@ -16,9 +15,8 @@ const config = {
     database: process.env.TEST_DATABASE,
     host: "127.0.0.1",
     port: 5432,
-    dialect: "postgres",
-    operatorsAliases: false
+    dialect: "postgres"
   }
 };
 
-export default config;
+module.exports = config;
