@@ -4,8 +4,8 @@
   "description": "An sms management application API",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node bin/index.js",
+    "test": "export NODE_ENV=test && sequelize db:migrate && jest tests/*.test.js -i --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "HawiCaesar",
@@ -14,6 +14,9 @@
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
+    "babel-jest": "^24.5.0",
+    "babel-polyfill": "^6.26.0",
+    "jest": "^24.5.0",
     "nodemon": "^1.18.10",
     "supertest": "^4.0.2"
   },

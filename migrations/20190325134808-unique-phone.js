@@ -27,5 +27,9 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
+    return queryInterface.removeConstraint(
+      "Contacts",
+      "phone_unique_constraint"
+    );
   }
 };
