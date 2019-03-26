@@ -7,19 +7,19 @@ import createTestContacts from "./setup";
 const api = new requests(app);
 
 const sms = {
-  sender: "872378328",
-  receiver: "1890923",
+  sender: "254927033477",
+  receiver: "254727133477",
   message: "Hello"
 };
 
 const nonExistingSender = {
   sender: "87237832899",
-  receiver: "1890923",
+  receiver: "254727133477",
   message: "Hello"
 };
 
 const nonExistingReceiver = {
-  sender: "872378328",
+  sender: "254927033477",
   receiver: "1890923990",
   message: "Hello"
 };
@@ -84,8 +84,8 @@ describe("/api/message tests", () => {
 
   it("should delete message", done => {
     const newSms = {
-      sender: "1890923",
-      receiver: "872378328",
+      sender: "254927033477",
+      receiver: "254727133477",
       message: "Hello there"
     };
 
@@ -121,6 +121,62 @@ describe("/api/message tests", () => {
         expect(response.status).toEqual(404);
         expect(response.body.message).toMatch("Message does not exist");
         done();
+      });
+  });
+
+  it("should see a list of received messages from contact", done => {
+    const checkReceiveSms = {
+      sender: "254729233477",
+      receiver: "254500233477",
+      message: "Hello..."
+    };
+    api
+      .post("/api/message")
+      .set("Content-Type", "application/json")
+      .send(checkReceiveSms)
+      .end((postError, postResponse) => {
+        if (postError) {
+          throw done(postError);
+        }
+        api
+          .get("/api/message/received-messages/254500233477")
+          .end((error, response) => {
+            if (error) {
+              throw done(error);
+            }
+            expect(response.status).toEqual(200);
+            expect(response.body.contact.phone).toMatch("254500233477");
+            expect(response.body.receivedMessages.length).toEqual(1);
+            done();
+          });
+      });
+  });
+
+  it("should see a list of sent messages from contact", done => {
+    const checkSentSms = {
+      sender: "254729233477",
+      receiver: "254500233477",
+      message: "My gooodnesssss"
+    };
+    api
+      .post("/api/message")
+      .set("Content-Type", "application/json")
+      .send(checkSentSms)
+      .end((postError, postResponse) => {
+        if (postError) {
+          throw done(postError);
+        }
+        api
+          .get("/api/message/sent-messages/254729233477")
+          .end((error, response) => {
+            if (error) {
+              throw done(error);
+            }
+            expect(response.status).toEqual(200);
+            expect(response.body.contact.phone).toMatch("254729233477");
+            expect(response.body.sentMessages.length).toEqual(1);
+            done();
+          });
       });
   });
 });

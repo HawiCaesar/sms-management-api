@@ -1,5 +1,4 @@
 import db from "../models/index";
-import Message from "../models/message";
 
 export const createContact = (request, response) => {
   return db.Contact.create({
@@ -52,6 +51,58 @@ export const getOneContact = (request, response) => {
     })
     .catch(error =>
       response.status(404).send({ message: "Contact not found", error })
+    );
+};
+
+export const getSentMessagesByContact = (request, response) => {
+  return db.Contact.findOne({
+    where: {
+      phone: request.params.phone
+    },
+    include: [
+      {
+        model: db.Message,
+        as: "sentMessages"
+      }
+    ]
+  })
+    .then(messages => {
+      if (!messages) {
+        return response.status(404).send({ message: "Messages do exist" });
+      }
+      return response.status(200).send({
+        contact: { name: messages.name, phone: messages.phone },
+        sentMessages: messages.sentMessages
+      });
+    })
+    .catch(error =>
+      response.status(400).send({ message: "An error occurred", error })
+    );
+};
+
+export const getReceivedMessagesByContact = (request, response) => {
+  return db.Contact.findOne({
+    where: {
+      phone: request.params.phone
+    },
+    include: [
+      {
+        model: db.Message,
+        as: "receivedMessages"
+      }
+    ]
+  })
+    .then(messages => {
+      if (!messages) {
+        return response.status(404).send({ message: "Messages do not exist" });
+      }
+      return response.status(200).send({
+        contact: { name: messages.name, phone: messages.phone },
+        receivedMessages: messages.receivedMessages
+      });
+    })
+    .catch(error =>
+      response.status(400).send({ message: "An error occurred", error })
     );
 };
 
