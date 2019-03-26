@@ -6,7 +6,7 @@ import {
   updateContact
 } from "../controllers/contact";
 
-import { createMessage } from "../controllers/message";
+import { createMessage, deleteMessage } from "../controllers/message";
 import { checkSender, checkReceiver } from "../middleware/checkContacts";
 
 const Route = express.Router();
@@ -17,5 +17,6 @@ Route.get("/contacts/:contactId", getOneContact);
 Route.put("/contacts/:contactId", updateContact);
 
 Route.post("/message", checkSender, checkReceiver, createMessage);
+Route.delete("/message/:messageId", deleteMessage);
 
 export default Route;
