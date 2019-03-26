@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
             msg: "The message cannot be empty"
           }
         }
+      },
+      status: {
+        type: DataTypes.STRING
       }
     },
     {}

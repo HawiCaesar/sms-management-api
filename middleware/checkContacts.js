@@ -3,7 +3,7 @@ import db from "../models/index";
 export const checkSender = (request, response, next) => {
   return db.Contact.findOne({
     where: {
-      phone: request.body.senderId
+      phone: request.body.sender
     }
   })
     .then(contact => {
@@ -12,17 +12,18 @@ export const checkSender = (request, response, next) => {
           .status(404)
           .send({ message: "sender contact not found" });
       }
+      request.body.senderId = contact.dataValues.id;
       next();
     })
     .catch(error =>
-      response.status(400).send({ message: "senderId missing", error })
+      response.status(400).send({ message: "sender value missing", error })
     );
 };
 
 export const checkReceiver = (request, response, next) => {
   return db.Contact.findOne({
     where: {
-      phone: request.body.receiverId
+      phone: request.body.receiver
     }
   })
     .then(contact => {
@@ -31,9 +32,10 @@ export const checkReceiver = (request, response, next) => {
           .status(404)
           .send({ message: "receiver contact not found" });
       }
+      request.body.receiverId = contact.dataValues.id;
       next();
     })
     .catch(error =>
-      response.status(400).send({ message: "receiverId missing", error })
+      response.status(400).send({ message: "receiver value missing", error })
     );
 };
