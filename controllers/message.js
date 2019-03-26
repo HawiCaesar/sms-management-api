@@ -4,11 +4,10 @@ export const createMessage = (request, response) => {
   return db.Message.create({
     senderId: request.body.senderId,
     receiverId: request.body.receiverId,
-    message: request.body.message
+    message: request.body.message,
+    status: "sent"
   })
-    .then(message =>
-      response.status(201).send({ status: "success", response: message })
-    )
+    .then(message => response.status(201).send({ response: message }))
     .catch(error =>
       response.status(400).send({ status: "error", response: error })
     );

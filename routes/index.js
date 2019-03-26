@@ -3,7 +3,8 @@ import {
   createContact,
   getAllContacts,
   getOneContact,
-  updateContact
+  updateContact,
+  deleteContact
 } from "../controllers/contact";
 
 import { createMessage, deleteMessage } from "../controllers/message";
@@ -15,6 +16,7 @@ Route.post("/contacts", createContact);
 Route.get("/contacts", getAllContacts);
 Route.get("/contacts/:contactId", getOneContact);
 Route.put("/contacts/:contactId", updateContact);
+Route.delete("/contacts/:contactId", deleteContact);
 
 Route.post("/message", checkSender, checkReceiver, createMessage);
 Route.delete("/message/:messageId", deleteMessage);
