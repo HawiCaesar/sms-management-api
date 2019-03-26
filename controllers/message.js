@@ -13,3 +13,19 @@ export const createMessage = (request, response) => {
       response.status(400).send({ status: "error", response: error })
     );
 };
+
+export const deleteMessage = (request, response) => {
+  return db.Message.findOne({
+    where: {
+      id: request.params.messageId
+    }
+  }).then(message => {
+    if (!message) {
+      return response.status(404).send({ message: "Message does not exist" });
+    }
+    return message
+      .destroy()
+      .then(() => response.status(204).send())
+      .catch(error => response.status(400).send({ message: `${error}` }));
+  });
+};

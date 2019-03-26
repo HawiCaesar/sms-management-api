@@ -7,3 +7,11 @@ export const destroyContacts = () => {
     cascade: true
   });
 };
+
+export const destroyMessages = () => {
+  return db.Message.destroy({
+    truncate: true,
+    restartIdentity: true,
+    cascade: true
+  });
+};
