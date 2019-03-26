@@ -64,13 +64,13 @@ describe("/api/contacts tests", () => {
         api
           .put("/api/contacts/1")
           .set("Content-Type", "application/json")
-          .send({ phone: "09812345078" })
+          .send({ phone: "254738900800" })
           .end((updateError, response) => {
             if (updateError) {
               throw done(updateError);
             }
             expect(response.status).toEqual(200);
-            expect(response.body.contact.phone).toMatch("09812345078");
+            expect(response.body.contact.phone).toMatch("254738900800");
             done();
           });
       });
@@ -83,7 +83,7 @@ describe("/api/contacts tests", () => {
       }
       expect(response.status).toEqual(200);
       expect(response.body.contact.name).toMatch("Derren Green");
-      expect(response.body.contact.phone).toMatch("101201212");
+      expect(response.body.contact.phone).toMatch("254727133477");
       done();
     });
   });

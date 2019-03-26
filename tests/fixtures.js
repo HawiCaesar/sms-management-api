@@ -1,19 +1,19 @@
 export default [
   {
     name: "John Brown",
-    phone: "872378328"
+    phone: "254927033477"
   },
   {
     name: "Derren Green",
-    phone: "101201212"
+    phone: "254727133477"
   },
   {
     name: "Jasmine Haddish",
-    phone: "1890923"
+    phone: "254500233477"
   },
   {
     name: "Jelly Waldo",
-    phone: "8901234565895489"
+    phone: "254729233477"
   }
 ];
 
