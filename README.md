@@ -106,7 +106,7 @@ This is a node.js app that depends on the following technologies.
 }
 ```
 
-### GET a single contact `/api/contacts/7`
+### GET a single contact `/api/contacts/:contactId`
 
 #### Response
 
@@ -172,7 +172,7 @@ This is a node.js app that depends on the following technologies.
 }
 ```
 
-### PUT a contact (update) `/api/contacts/2`
+### PUT a contact (update) `/api/contacts/:contactId`
 
 #### Request
 
@@ -195,7 +195,7 @@ This is a node.js app that depends on the following technologies.
 }
 ```
 
-### DELETE a contact `/api/contacts/7`
+### DELETE a contact `/api/contacts/:contactId`
 
 #### Response
 
@@ -223,14 +223,14 @@ status code 204
 }
 ```
 
-### DELETE a message `/api/message/15`
+### DELETE a message `/api/message/:messageId`
 
 #### Response
 
 status code 204
 
-### GET messages by sent by contact `/api/message/sent-messages/1239009321`
-
+### GET messages by sent by contact `/api/message/sent-messages/:phone`
+in this case phone is `1239009321`
 #### Response
 
 ```
@@ -271,7 +271,7 @@ status code 204
             "id": 13,
             "senderId": 3,
             "receiverId": 2,
-            "message": "Nigggaarrrh",
+            "message": "Goody",
             "status": "sent",
             "createdAt": "2019-03-26T13:52:30.156Z",
             "updatedAt": "2019-03-26T13:52:30.156Z"
@@ -280,8 +280,8 @@ status code 204
 }
 ```
 
-### GET messages by received by contact `/api/message/received-messages/1239009321`
-
+### GET messages by received by contact `/api/message/received-messages/:phone`
+in this case phone is `1239009321`
 #### Response
 
 ```
