@@ -47,7 +47,7 @@ export const getOneContact = (request, response) => {
     );
 };
 
-export const updateContacts = (request, response) => {
+export const updateContact = (request, response) => {
   return db.Contact.findOne({
     where: {
       id: request.params.contactId

@@ -2,7 +2,7 @@ import "babel-polyfill";
 import requests from "supertest";
 import app from "../app";
 import { destroyContacts } from "./teardown";
-import validContact from "./fixtures";
+import validContacts from "./fixtures";
 
 const api = new requests(app);
 
@@ -15,7 +15,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact[0])
+      .send(validContacts[0])
       .end((error, response) => {
         if (error) {
           throw done(error);
@@ -30,7 +30,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact[1])
+      .send(validContacts[1])
       .end((postError, postResponse) => {
         if (postError) {
           throw done(postError);
@@ -38,7 +38,7 @@ describe("/api/contacts tests", () => {
         api
           .post("/api/contacts")
           .set("Content-Type", "application/json")
-          .send(validContact[1])
+          .send(validContacts[1])
           .end((postAgainError, postAgainResponse) => {
             if (postAgainError) {
               throw done(postAgainError);
@@ -56,7 +56,7 @@ describe("/api/contacts tests", () => {
     api
       .post("/api/contacts")
       .set("Content-Type", "application/json")
-      .send(validContact[2])
+      .send(validContacts[2])
       .end((postError, postResponse) => {
         if (postError) {
           throw done(postError);
@@ -92,7 +92,6 @@ describe("/api/contacts tests", () => {
       if (fetchError) {
         throw done(fetchError);
       }
-      console.log(response.body, "@##@");
       expect(response.status).toEqual(404);
       expect(response.body.message).toMatch("Contact not found");
       done();
