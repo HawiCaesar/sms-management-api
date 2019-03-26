@@ -87,6 +87,7 @@ describe("/api/contacts tests", () => {
       done();
     });
   });
+
   it("should show an error for a non-existing contact", done => {
     api.get("/api/contacts/99").end((fetchError, response) => {
       if (fetchError) {
@@ -96,5 +97,32 @@ describe("/api/contacts tests", () => {
       expect(response.body.message).toMatch("Contact not found");
       done();
     });
+  });
+
+  it("should delete a contact", done => {
+    api
+      .delete("/api/contacts/2")
+      .set("Content-Type", "application/json")
+      .end((deleteError, deleteResponse) => {
+        if (deleteError) {
+          throw done(deleteError);
+        }
+        expect(deleteResponse.status).toEqual(204);
+        done();
+      });
+  });
+
+  it("should not delete a contact that does not exist", done => {
+    api
+      .delete("/api/contacts/990")
+      .set("Content-Type", "application/json")
+      .end((deleteError, deleteResponse) => {
+        if (deleteError) {
+          throw done(deleteError);
+        }
+        expect(deleteResponse.status).toEqual(404);
+        expect(deleteResponse.body.message).toMatch("Contact not found");
+        done();
+      });
   });
 });

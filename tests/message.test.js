@@ -7,20 +7,20 @@ import createTestContacts from "./setup";
 const api = new requests(app);
 
 const sms = {
-  senderId: "872378328",
-  receiverId: "1890923",
+  sender: "872378328",
+  receiver: "1890923",
   message: "Hello"
 };
 
 const nonExistingSender = {
-  senderId: "87237832899",
-  receiverId: "1890923",
+  sender: "87237832899",
+  receiver: "1890923",
   message: "Hello"
 };
 
 const nonExistingReceiver = {
-  senderId: "872378328",
-  receiverId: "1890923990",
+  sender: "872378328",
+  receiver: "1890923990",
   message: "Hello"
 };
 
@@ -47,7 +47,7 @@ describe("/api/message tests", () => {
           throw done(error);
         }
         expect(response.status).toEqual(201);
-        expect(response.body.status).toMatch("success");
+        expect(response.body.response.status).toMatch("sent");
         done();
       });
   });
@@ -84,8 +84,8 @@ describe("/api/message tests", () => {
 
   it("should delete message", done => {
     const newSms = {
-      senderId: "1890923",
-      receiverId: "872378328",
+      sender: "1890923",
+      receiver: "872378328",
       message: "Hello there"
     };
 
