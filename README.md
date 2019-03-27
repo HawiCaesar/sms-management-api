@@ -199,16 +199,16 @@ This is a node.js app that depends on the following technologies.
 
 #### Response
 
-status code 204
+status code `204`
 
 ### POST a message `/api/message`
 
 #### Request
-
+```
 { "sender": "254789123450", "receiver": "1239009321", "message": "goody"}
+```
 
 #### Response
-
 ```
 {
     "response": {
@@ -227,7 +227,7 @@ status code 204
 
 #### Response
 
-status code 204
+status code `204`
 
 ### GET messages by sent by contact `/api/message/sent-messages/:phone`
 in this case phone is `1239009321`
