@@ -11,22 +11,22 @@
   "author": "HawiCaesar",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.4.2",
-    "babel-jest": "^24.5.0",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "babel-jest": "^24.9.0",
     "babel-polyfill": "^6.26.0",
-    "jest": "^24.5.0",
-    "nodemon": "^1.18.10",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "dotenv": "^7.0.0",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "pg": "^7.9.0",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^5.4.0"
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.19.6"
   }
 }
